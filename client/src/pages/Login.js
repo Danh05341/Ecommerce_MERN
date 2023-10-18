@@ -1,7 +1,9 @@
 import { BiShow, BiHide } from 'react-icons/bi'
 import loginSignupImage from '../assets/images/login-animation.gif'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginRedux } from '../redux/userSlice.js'
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -9,6 +11,8 @@ const Login = () => {
         email: '',
         password: '',
     })
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleOnChange = (e) => {
         const name = e.target.name
@@ -20,12 +24,31 @@ const Login = () => {
             }
         })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         const { email, password } = dataForm
         if (email && password) {
-            alert("successful")
-
+            const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/users/login`, {
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json"
+                },  
+                body: JSON.stringify(dataForm)
+            })
+            const dataRes = await fetchData.json()
+            if(dataRes.data) {
+                alert("successful")
+                dispatch(loginRedux(dataRes))
+                setTimeout(() => {
+                    navigate('/')
+                }, 1000)
+            }
+            else{
+                //Có lưu ý gì khi sử dụng, Xem lại f8 thử
+                setTimeout(() => {
+                    alert(dataRes.message)
+                }, 1000)
+            }
         }
         else {
             alert("Please enter required fields")
