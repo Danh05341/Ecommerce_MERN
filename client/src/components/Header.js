@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutRedux } from '../redux/userSlice'
 import Cart from './Cart';
-
 import logo from '../assets/images/logo.webp'
 
 const Header = () => {
@@ -25,9 +24,8 @@ const Header = () => {
     // }
     // const userData = useSelector(state => state.user.data)
     const [inputValue, setInputValue] = useState('')
-    const [isHoverLogin, setIsHoverLogin] = useState(false)
     const [isHoverCart, setIsHoverCart] = useState(false)
-
+     
     const navigate = useNavigate();
 
     const handleInput = (e) => {
@@ -113,21 +111,18 @@ const Header = () => {
                         </div>
                     </a>
 
-                    <div class="relative h-[45px] w-[45px] bg-[#ff2d37] rounded-[50px] flex items-center justify-center text-white cursor-pointer" onMouseEnter={() => setIsHoverLogin(true)} onMouseLeave={() => setIsHoverLogin(false)}>
+                    <div class="relative h-[45px] w-[45px] bg-[#ff2d37] rounded-[50px] flex items-center justify-center text-white cursor-pointer group/user  " >
                         <BiSolidUser />
-                        {
-                            isHoverLogin && (
-                                <div class=" opacity-1 visibility-hidden w-[180px] bg-white p-[10px] text-center absolute z-50 top-[50px] border rounded-[10px] transition duration-300 ease-in-out shadow-md">
-                                    <a class="block bg-[#ff2d37] text-white border border-[#ff2d37] h-[35px] leading-[35px] rounded-[25px] mt-[5px] hover:bg-white hover:text-[#ff2d37]" href="#">Đăng nhập</a>
-                                    <a class="block bg-[#ff2d37] text-white border border-[#ff2d37] h-[35px] leading-[35px] rounded-[25px] mt-[5px] hover:bg-white hover:text-[#ff2d37]" href="#">Đăng ký</a>
-                                </div>
-                            )
-                        }
+
+                        <div class=" hidden w-[180px] bg-white p-[10px] text-center absolute z-50 top-[45px] border rounded-[10px] shadow-md group-hover/user:block ">
+                            <a class="block bg-[#ff2d37] text-white border border-[#ff2d37] h-[35px] leading-[35px] rounded-[25px] mt-[5px] hover:bg-white hover:text-[#ff2d37]" href="#">Đăng nhập</a>
+                            <a class="block bg-[#ff2d37] text-white border border-[#ff2d37] h-[35px] leading-[35px] rounded-[25px] mt-[5px] hover:bg-white hover:text-[#ff2d37]" href="#">Đăng ký</a>
+                        </div>
                     </div>
-                    
-                    <div class="relative h-[45px] w-[45px] bg-[#ff2d37] rounded-[50px] flex items-center justify-center  text-white cursor-pointer">
+
+                    <div class="relative h-[45px] w-[45px] bg-[#ff2d37] rounded-[50px] flex items-center justify-center  text-white cursor-pointer group/cart" >
                         <FaBasketShopping />
-                        <Cart/>
+                        <Cart />
                     </div>
                 </div>
             </div>

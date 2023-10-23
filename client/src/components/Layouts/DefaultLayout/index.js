@@ -1,11 +1,13 @@
 import Header from '../../Header'
 import Footer from '../../Footer'
+import Navbar from '../../Navbar'
 
 
 const DefaultLayout = ({ children }) => {
     return (
         <>
             <Header/>
+            <Navbar/>
             <main className='pt-16 bg-slate-100 min-h-[calc(100vh)]'>
                 {children}
             </main>

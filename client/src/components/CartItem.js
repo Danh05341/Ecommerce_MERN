@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import productImage from '../assets/images/product-1.webp'
+import productImage from '../assets/images/product_1.webp'
 import { BsTrash3Fill } from 'react-icons/bs'
 const CartItem = (props) => {
     const {product} = props
